@@ -64,8 +64,9 @@ def loss_plotting():
 
         data = request.form.to_dict()
         param = read_from_pickle('parametrs.pickle')
-        print(app.param, flush=True)
+        print(param, flush=True)
         get_data(data, 'mean_loss', param['mean'])
+        param['mean'].append(1)
         get_data(data, 'min_loss', param['min'])
         get_data(data, 'max_loss', param['max'])
         get_data(data, 'lr', param['lr'])
