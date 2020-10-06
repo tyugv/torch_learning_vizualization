@@ -3,7 +3,7 @@ services:
     torch_learning_vizualization:
       container_name: torch_learning_vizualization
       build: ./torch_learning_vizualization
-      command: gunicorn --bind 0.0.0.0:5001 app:app
+      command: gunicorn --timeout 100 --bind 0.0.0.0:5001 --reload --reload-extra-file ./static/loss_plot.png  app:app
       volumes:
         - ./torch_learning_vizualization/:/usr/src/app/
       ports:
