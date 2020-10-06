@@ -3,29 +3,14 @@ from flask import Flask, jsonify, request, render_template, Response, send_file
 from livereload import Server
 import pickle
 
-
-def write_to_pickle(path, data):
-    with open(path, 'wb') as f:
-        pickle.dump(data, f)
-    f.close()
-
-
-def read_from_pickle(path):
-    with open(path, 'rb') as f:
-        data = pickle.load(f)
-    f.close()
-    return data
-
-
 app = Flask(__name__)
 
-app.param = {
+app.params = {
     'max': [],
     'mean': [],
     'min': [],
     'lr': 0
 }
-write_to_pickle('parametrs.pickle', app.param)
 
 def get_data(data, header, arr):
 
@@ -40,9 +25,9 @@ def get_data(data, header, arr):
 
 def refresh_plot():
     fig = plt.figure()
-    plt.plot(app.param['max'])
-    plt.plot(app.param['mean'])
-    plt.plot(app.param['min'])
+    plt.plot(app.params['max'])
+    plt.plot(app.params['mean'])
+    plt.plot(app.params['min'])
     plt.savefig('static/loss_plot.png', format='png')
     plt.close(fig)
 
@@ -63,23 +48,19 @@ def loss_plotting():
     if request.method == 'POST':
 
         data = request.form.to_dict()
-        param = read_from_pickle('parametrs.pickle')
-        print(param, flush=True)
-        get_data(data, 'mean_loss', param['mean'])
-        param['mean'].append(1)
-        get_data(data, 'min_loss', param['min'])
-        get_data(data, 'max_loss', param['max'])
-        get_data(data, 'lr', param['lr'])
-        write_to_pickle('parametrs.pickle', param)
 
-        #if len(learning_rate) > 0:
-        #    # вернуть шаг обучения если был получен
-        #    return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': learning_rate[-1]}
+        get_data(data, 'mean_loss', app.params['mean'])
+        get_data(data, 'min_loss', app.params['min'])
+        get_data(data, 'max_loss', app.params['max'])
+        get_data(data, 'lr', app.params['lr'])
+
+        if len(app.params['lr']) > 0:
+            # вернуть шаг обучения если был получен
+            return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': app.params['lr'][-1]}
 
         refresh_plot()
-
         return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
-    print(read_from_pickle('parametrs.pickle'), flush=True)
+
     return render_template('loss.html', url='static/loss_plot.png')
 
 
