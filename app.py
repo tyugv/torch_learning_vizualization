@@ -5,11 +5,12 @@ from livereload import Server
 
 app = Flask(__name__)
 app.debug = True
+app.mean_loss_change = [1,2]
 
 global max_loss_change
 max_loss_change = []
-global mean_loss_change
-mean_loss_change = [1,2]
+#global mean_loss_change
+#mean_loss_change = [1,2]
 global min_loss_change
 min_loss_change = []
 global learning_rate
@@ -30,7 +31,7 @@ def get_data(data, header, arr):
 def refresh_plot():
     fig = plt.figure()
     plt.plot(max_loss_change)
-    plt.plot(mean_loss_change)
+    plt.plot(app.mean_loss_change)
     plt.plot(min_loss_change)
     plt.savefig('static/loss_plot.png', format='png')
     plt.close(fig)
@@ -52,8 +53,8 @@ def loss_plotting():
     if request.method == 'POST':
 
         data = request.form.to_dict()
-        mean_loss_change.append(1)
-        print(mean_loss_change, flush=True)
+        app.mean_loss_change.append(1)
+        print(app.mean_loss_change, flush=True)
         get_data(data, 'mean_loss', mean_loss_change)
         get_data(data, 'min_loss', min_loss_change)
         get_data(data, 'max_loss', max_loss_change)
@@ -68,8 +69,8 @@ def loss_plotting():
         return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
 
     #return render_template('loss.html', url='static/loss_plot.png')
-    print(mean_loss_change, flush=True)
-    return jsonify(str(mean_loss_change))
+    print(app.mean_loss_change, flush=True)
+    return jsonify(str(app.mean_loss_change))
 
 
 if __name__ == '__main__':
