@@ -64,6 +64,7 @@ def loss_plotting():
 
         data = request.form.to_dict()
         app.param = read_from_pickle('parametrs.pickle')
+        print(app.param, flush=True)
         get_data(data, 'mean_loss', app.param['mean'])
         get_data(data, 'min_loss', app.param['min'])
         get_data(data, 'max_loss', app.param['max'])
@@ -75,9 +76,9 @@ def loss_plotting():
         #    return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': learning_rate[-1]}
 
         refresh_plot()
-        print(app.param, flush=True)
+
         return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
-    print(app.param, flush=True)
+    print(read_from_pickle('parametrs.pickle'), flush=True)
     return render_template('loss.html', url='static/loss_plot.png')
 
 
