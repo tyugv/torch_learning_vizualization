@@ -62,7 +62,8 @@ def loss_plotting():
 
         return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
 
-    return render_template('loss.html', url='static/loss_plot.png')
+    #return render_template('loss.html', url='static/loss_plot.png')
+    return jsonify(str(mean_loss_change))
 
 
 if __name__ == '__main__':
