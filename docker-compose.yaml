@@ -1,11 +1,11 @@
 version: '3.3'
 services:
-    model_executor:
-    container_name: torch_learning_vizualization
-    build: ./torch_learning_vizualization
-    command: gunicorn --bind 0.0.0.0:5001 app:app
-    volumes:
-      - ./torch_learning_vizualization/:/usr/src/app/
-    ports:
-      - 5001:5001
-    restart: always
+    torch_learning_vizualization:
+      container_name: torch_learning_vizualization
+      build: ./torch_learning_vizualization
+      command: gunicorn --bind 0.0.0.0:5001 app:app
+      volumes:
+        - ./torch_learning_vizualization/:/usr/src/app/
+      ports:
+        - 5001:5001
+      restart: always
