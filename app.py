@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-from flask import Flask, jsonify, request, render_template, Response
+from flask import Flask, jsonify, request, render_template, Response, send_file
 from livereload import Server
 
 
@@ -59,6 +59,8 @@ def loss_plotting():
             return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': learning_rate[-1]}
 
         refresh_plot()
+
+        send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
