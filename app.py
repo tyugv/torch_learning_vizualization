@@ -60,7 +60,7 @@ def loss_plotting():
 
         refresh_plot()
 
-        send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
+        return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
