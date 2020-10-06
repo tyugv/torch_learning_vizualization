@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.debug = True
 
 max_loss_change = []
-mean_loss_change = []
+mean_loss_change = [1,2]
 min_loss_change = []
 learning_rate = []
 
@@ -49,6 +49,7 @@ def loss_plotting():
 
         data = request.form.to_dict()
         mean_loss_change.append(1)
+        print(mean_loss_change, flush=True)
         get_data(data, 'mean_loss', mean_loss_change)
         get_data(data, 'min_loss', min_loss_change)
         get_data(data, 'max_loss', max_loss_change)
