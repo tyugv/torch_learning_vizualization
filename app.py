@@ -48,7 +48,7 @@ def loss_plotting():
     if request.method == 'POST':
 
         data = request.form.to_dict()
-
+        mean_loss_change.append(1)
         get_data(data, 'mean_loss', mean_loss_change)
         get_data(data, 'min_loss', min_loss_change)
         get_data(data, 'max_loss', max_loss_change)
