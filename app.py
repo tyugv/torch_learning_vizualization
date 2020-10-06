@@ -6,9 +6,13 @@ from livereload import Server
 app = Flask(__name__)
 app.debug = True
 
+global max_loss_change
 max_loss_change = []
+global mean_loss_change
 mean_loss_change = [1,2]
+global min_loss_change
 min_loss_change = []
+global learning_rate
 learning_rate = []
 
 
