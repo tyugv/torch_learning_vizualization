@@ -41,7 +41,8 @@ class Learning:
         plt.plot(self.params['mean'])
         plt.plot(self.params['min'])
         lr = app.model.params['cur_lr']
-        plt.title(f'Loss plots with lr = {lr}')
+        itr = len(app.model.params['mean'])
+        plt.title(f'Loss plots with lr = {lr}, iteration {itr}')
         plt.savefig('static/loss_plot.png', format='png')
         plt.close(fig)
 
