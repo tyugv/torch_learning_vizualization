@@ -18,9 +18,10 @@ def get_data(data, header, arr):
 def change_data(data, header, el):
     if header in data:
         try:
-            el = float(data[header])
+            return float(data[header])
         except ValueError:
             print('get value not as number')
+            return el
 
 
 class Learning:
@@ -45,8 +46,8 @@ class Learning:
         get_data(data, 'mean_loss', self.params['mean'])
         get_data(data, 'min_loss', self.params['min'])
         get_data(data, 'max_loss', self.params['max'])
-        change_data(data, 'lr', self.params['lr'])
-        change_data(data, 'cur_lr', self.params['cur_lr'])
+        self.params['lr'] = change_data(data, 'lr', self.params['lr'])
+        self.params['cur_lr'] = change_data(data, 'cur_lr', self.params['cur_lr'])
         self.refresh_plot()
 
 
@@ -70,7 +71,7 @@ def index():
     if request.method == 'POST':
         data = request.form.to_dict()
         app.model.refresh_params(data)
-        if app.model.params['lr'] != app.model.params['cur_lr']:
+        if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
             return render_template('loss.html', url='static/loss_plot.png'), 200, \
                    {'lr': app.model.params['lr']}
 
