@@ -54,10 +54,6 @@ def loss_plotting():
         get_data(data, 'max_loss', app.params['max'])
         get_data(data, 'lr', app.params['lr'])
 
-        if len(app.params['lr']) > 0:
-            # вернуть шаг обучения если был получен
-            return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': app.params['lr'][-1]}
-
         refresh_plot()
         print(app.params['mean'], flush=True)
 
