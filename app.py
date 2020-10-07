@@ -21,7 +21,7 @@ def change_data(data, header, el):
             return float(data[header])
         except ValueError:
             print('get value not as number')
-            return el
+    return el
 
 
 class Learning:
