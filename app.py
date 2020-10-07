@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 from flask import Flask, jsonify, request, render_template, Response, send_file
-from livereload import Server
+#from livereload import Server
 import pickle
 
 app = Flask(__name__)
@@ -62,6 +62,7 @@ def loss_plotting():
 
 if __name__ == '__main__':
 
-    server = Server(app.wsgi_app)
-    server.watch('static/loss_plot.png')
-    server.serve(port=5000)
+    app.run()
+    #server = Server(app.wsgi_app)
+    #server.watch('static/loss_plot.png')
+    #server.serve(port=5000)

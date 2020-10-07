@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Learning vizualization</title>
-    <script type="text/javascript" src="http://livejs.com/live.js"></script>
+    <script language="JavaScript">
+    function refreshIt(element) {
+        setTimeout(function() {
+            element.src = element.src.split('?')[0] + '?' + new Date().getTime();
+            refreshIt(element);
+        }, 3000); // refresh every 3s
+    }
+</script>
 </head>
 <body>
     <form action="" method="post">
@@ -11,6 +18,6 @@
         <input type = "text" name = "lr">
         <input type=submit>
     </form>
-    <img src={{url}} alt="my plot">
+    <img src={{url}} alt="my plot" onload="refreshIt(this)">
 </body>
 </html>
