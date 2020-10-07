@@ -72,7 +72,7 @@ def index():
         data = request.form.to_dict()
         app.model.refresh_params(data)
         if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
-            print(app.model.params['lr'])
+            print(app.model.params['lr'], flush=True)
             return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
 
     return render_template('loss.html', url='static/loss_plot.png')
