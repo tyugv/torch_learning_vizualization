@@ -75,7 +75,7 @@ def index():
         app.model.refresh_params(data)
         if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
             lr = app.model.params['lr']
-            app.model.params['lr'] = app.model.params['cur_lr']
+            app.model.params['lr'] = 0
             return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': lr}
 
     return render_template('loss.html', url='static/loss_plot.png')
