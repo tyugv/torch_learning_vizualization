@@ -33,6 +33,7 @@ class Learning:
             self.params = {'max': [], 'mean': [], 'min': [], 'lr': 0, 'cur_lr': 0}
         else:
             self.params = params
+        self.changeLr = False
 
     def refresh_plot(self):
         fig = plt.figure()
@@ -73,10 +74,11 @@ def index():
     if request.method == 'POST':
         data = request.form.to_dict()
         app.model.refresh_params(data)
-        if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
-            lr = app.model.params['lr']
-            app.model.params['lr'] = 0
-            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': lr}
+        if 'lr' in data:
+            app.model.changeLr = True
+        if app.model.changeLr:
+            app.model.changeLr = False
+            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
