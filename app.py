@@ -59,7 +59,7 @@ def loss_plotting():
             return render_template('loss.html', url='static/loss_plot.png'), 201, {'lr': app.params['lr'][-1]}
 
         refresh_plot()
-        return send_file('static/loss_plot.png', mimetype='image/png'), 206, {'message': 'Sent'}
+        print(app.params['mean'], flush=True)
 
     return render_template('loss.html', url='static/loss_plot.png')
 
