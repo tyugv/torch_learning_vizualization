@@ -9,7 +9,7 @@ app.params = {
     'max': [],
     'mean': [],
     'min': [],
-    'lr': 0
+    'lr': [0]
 }
 
 def get_data(data, header, arr):
