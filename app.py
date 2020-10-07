@@ -86,7 +86,10 @@ def index():
 
 @app.route('/new_learning', methods=['POST'])
 def create_new_learning():
-    del app.model
+    try:
+        del app.model
+    except AttributeError:
+        pass
     app.model = Learning()
     app.model.refresh_plot()
     return redirect(url_for('index'))
