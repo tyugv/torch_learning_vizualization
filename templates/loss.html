@@ -8,11 +8,15 @@
         setTimeout(function() {
             element.src = element.src.split('?')[0] + '?' + new Date().getTime();
             refreshIt(element);
-        }, 3000); // refresh every 3s
+        }, 10000); // refresh every 3s
     }
 </script>
 </head>
 <body>
+    <form action="/new_learning" method="post">
+      <button value="new_lrn">Новое обучение</button>
+    </form>
+    <br></br>
     <form action="" method="post">
         <label for="lr">learning rate</label>
         <input type = "text" name = "lr">
