@@ -76,9 +76,10 @@ def index():
         app.model.refresh_params(data)
         if 'lr' in data:
             app.model.changeLr = True
-        if app.model.changeLr:
-            app.model.changeLr = False
-            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
+        else:
+            if app.model.changeLr:
+                app.model.changeLr = False
+                return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
