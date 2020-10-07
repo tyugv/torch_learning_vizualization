@@ -72,8 +72,8 @@ def index():
         data = request.form.to_dict()
         app.model.refresh_params(data)
         if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
-            return render_template('loss.html', url='static/loss_plot.png'), 200, \
-                   {'lr': app.model.params['lr']}
+            print(app.model.params['lr'])
+            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
@@ -82,6 +82,7 @@ def index():
 def create_new_learning():
     del app.model
     app.model = Learning()
+    app.model.refresh_plot()
     return redirect(url_for('index'))
 
 
