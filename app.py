@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 from flask import Flask, jsonify, request, render_template, Response, send_file
-#from livereload import Server
 import pickle
 
 app = Flask(__name__)
@@ -55,14 +54,10 @@ def loss_plotting():
         get_data(data, 'lr', app.params['lr'])
 
         refresh_plot()
-        print(app.params['mean'], flush=True)
-
+        
     return render_template('loss.html', url='static/loss_plot.png')
 
 
 if __name__ == '__main__':
 
     app.run()
-    #server = Server(app.wsgi_app)
-    #server.watch('static/loss_plot.png')
-    #server.serve(port=5000)
