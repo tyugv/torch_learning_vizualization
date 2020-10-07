@@ -54,7 +54,7 @@ def loss_plotting():
         get_data(data, 'lr', app.params['lr'])
 
         refresh_plot()
-        
+
     return render_template('loss.html', url='static/loss_plot.png')
 
 
