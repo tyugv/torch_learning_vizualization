@@ -19,8 +19,10 @@ def change_data(data, header, el):
     if header in data:
         try:
             return float(data[header])
+
         except ValueError:
             print('get value not as number')
+
     return el
 
 
@@ -72,8 +74,9 @@ def index():
         data = request.form.to_dict()
         app.model.refresh_params(data)
         if app.model.params['lr'] != app.model.params['cur_lr'] and app.model.params['lr'] != 0:
-            print(app.model.params['lr'], flush=True)
-            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': app.model.params['lr']}
+            lr = app.model.params['lr']
+            app.model.params['lr'] = app.model.params['cur_lr']
+            return render_template('loss.html', url='static/loss_plot.png'), 200, {'lr': lr}
 
     return render_template('loss.html', url='static/loss_plot.png')
 
