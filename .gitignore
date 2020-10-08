@@ -19,4 +19,6 @@ learning/
 
 static/
 static
+static/loss_plot.png
+loss_plot.png
 parametrs.pickle
