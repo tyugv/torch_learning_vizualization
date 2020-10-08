@@ -4,11 +4,9 @@
     <meta charset="UTF-8">
     <title>Learning vizualization</title>
     <script language="JavaScript">
-    function refreshIt(element) {
-        setTimeout(function() {
-            element.src = element.src.split('?')[0] + '?' + new Date().getTime();
-            refreshIt(element);
-        }, 500); // refresh every 3s
+    function refreshIt(element) {setTimeout (function () {
+        element.src = element.src.split('?')[0] + '?' + new Date().getTime();
+    }, 500);// refresh every x s
     }
 </script>
 </head>
@@ -18,10 +16,10 @@
     </form>
     <br></br>
     <form action="" method="post">
-        <label for="lr">learning rate</label>
+        <label>learning rate</label>
         <input type = "text" name = "lr">
         <input type=submit>
     </form>
-    <img src={{url}} alt="my plot" onload="refreshIt(this)">
+    <img src={{url}} alt="my plot" onload="refreshIt(this)" onerror="refreshIt(this)">
 </body>
 </html>
