@@ -18,4 +18,5 @@ venv.bak/
 learning/
 
 static/
+static
 parametrs.pickle
